@@ -14,3 +14,16 @@ most_frequent_char('david') # -> 'd'
 """
 
 # brute force
+from collections import Counter
+
+def most_frequent_char(s):
+  store = Counter(s)
+  maximum = float('-inf')
+  returnChar = None
+
+  for char in store:
+    if store[char] > maximum:
+      maximum = store[char]
+      returnChar = char
+
+  return returnChar
