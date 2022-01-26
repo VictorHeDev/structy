@@ -4,17 +4,46 @@ Write a function, uncompress, that takes in a string as an argument. The input s
 <number><char>
 for example, '2c' or '3a'.
 The function should return an uncompressed version of the string where each 'char' is a group is repeated 'number' times consecutively. You may assume that the input string is well-formed according to the previously mentioned pattern.
+
+Strategy:
+- Use 2 pointer
+  1. keep track of number
+  2. keep track of char
+
 """
 
+# brute force approach
 def uncompress(s):
   resultArr = []
-  multiplier = ""
+  i = 0
 
-  for i in range(len(s)):
-    if s[i].isdigit():
-      multiplier += s[i]
-    else:
-      for j in range(int(multiplier)):
-        resultArr.append(s[i])
-        multiplier = ""
+  for j in range(len(s)):
+    if s[j].isalpha():
+      resultArr.append(int(s[i:j]) * s[j])
+      i = j + 1
   return "".join(resultArr)
+
+# solution
+def uncompress(s):
+  numbers = '0123456789'
+  result = []
+  i = 0
+  j = 0
+  while j < len(s):
+    if s[j] in numbers:
+      j += 1
+    else:
+      num = int(s[i:j])
+      result.append(s[j] * num)
+      j += 1
+      i = j
+
+  return ''.join(result)
+
+"""
+Complexity
+n = # of groups
+m = max # for any group
+Time: O(nm)
+Space: O(nm)
+"""
