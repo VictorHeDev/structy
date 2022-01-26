@@ -33,3 +33,23 @@ const anagrams = (s1, s2) => {
 
   return Object.values(store).every((val) => val === 0);
 };
+
+// solution
+const anagrams = (s1, s2) => {
+  // remember that we can't expect to compare objects in JS because
+  // that will strictly compare their locations in memory
+  const count = {};
+
+  for (let char of s1) {
+    if (!(char in count)) {
+      count[char] = 0;
+    }
+
+    count[char] += 1;
+  }
+
+  for (let char of s2) {
+    if (!(char in count) || count[char] === 0) return false;
+    count[char] -= 1;
+  }
+};
