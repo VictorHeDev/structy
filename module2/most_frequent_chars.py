@@ -15,6 +15,7 @@ most_frequent_char('david') # -> 'd'
 
 # brute force
 from collections import Counter
+from socket import RDS_RDMA_FENCE
 
 def most_frequent_char(s):
   store = Counter(s)
@@ -27,3 +28,4 @@ def most_frequent_char(s):
       returnChar = char
 
   return returnChar
+
