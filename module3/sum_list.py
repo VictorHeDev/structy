@@ -48,6 +48,7 @@ def sum_list(head):
 
   return sum
 
+# recursive
 def sum_list(head):
   sum = 0
   return sum_list_helper(head, sum)
@@ -57,3 +58,9 @@ def sum_list_helper(node, sum):
     return sum
   sum += node.val
   return sum_list_helper(node.next, sum)
+
+# solution for recursive
+def sum_list(head):
+  if head is None:
+    return 0
+  return head.val + sum_list(head.next)

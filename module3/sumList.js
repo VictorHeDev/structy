@@ -52,7 +52,7 @@ const sumList = (head) => {
   return sum;
 };
 
-// recursive 
+// recursive
 const sumList = (head) => {
   // let sum = 0;
   // sum = sumListHelper(head, sum);
@@ -65,3 +65,9 @@ const sumListHelper = (node, sum) => {
   sum += node.val;
   return sumListHelper(node.next, sum)
 }
+
+// solution
+const sumList = (head) => {
+  if (head === null) return 0;
+  return head.val + sumList(head.next);
+};
