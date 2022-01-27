@@ -17,14 +17,16 @@ pair_sum([4, 7, 9, 2, 5, 1], 5) # -> (0, 5)
 test_02:
 
 pair_sum([4, 7, 9, 2, 5, 1], 3) # -> (3, 5)
+
+Approach:
+- use a hash map so we can solve this in O(n) time and O(n) space
 """
 
 # brute force
 def pair_sum(numbers, target_sum):
   store = {}
-  for i in range(len(numbers)):
-    currNum = numbers[i]
-    if currNum in store:
-      return (store[currNum], i)
-    difference = target_sum - currNum
+  for i, num in enumerate(numbers):
+    if num in store:
+      return (store[num], i)
+    difference = target_sum - num
     store[difference] = i
