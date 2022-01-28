@@ -47,3 +47,30 @@ c.next = d;
 
 linkedListFind(a, "q"); // false
 */
+
+// class Node {
+//   constructor(val) {
+//     this.val = val;
+//     this.next = null;
+//   }
+// }
+
+// my approach
+// iterative
+const linkedListFind = (head, target) => {
+  current = head;
+
+  while (current !== null) {
+    if (current.val === target) return true;
+    current = current.next;
+  }
+
+  return false;
+};
+
+// recursive
+const linkedListFind = (head, target) => {
+  if (head === null) return false;
+  if (head.val === target) return true;
+  return linkedListFind(head.next, target);
+};
