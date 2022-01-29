@@ -60,3 +60,49 @@ s.next = t;
 mergeLists(a, q);
 // 1 -> 5 -> 7 -> 8 -> 9 -> 10 -> 10 -> 12 -> 20 -> 28
 */
+
+// my approaches
+// iterative
+class Node {
+  constructor(val) {
+    this.val = val;
+    this.next = null;
+  }
+}
+
+const mergeLists = (head1, head2) => {
+  let current1;
+  let current2;
+  let tail;
+  let genesis;
+
+  if (head1.val < head2.val) {
+    genesis = head1;
+    tail = head1;
+    current1 = head1.next;
+    current2 = head2;
+  } else {
+    genesis = head2;
+    tail = head2;
+    current2 = head2.next;
+    current1 = head1;
+  }
+
+  while (current1 !== null && current2 !== null) {
+    if (current1.val < current2.val) {
+      tail.next = current1;
+      current1 = current1.next;
+    } else {
+      tail.next = current2;
+      current2 = current2.next;
+    }
+    tail = tail.next;
+  }
+
+  if (current1 !== null) tail.next = current1;
+  if (current2 !== null) tail.next = current2;
+
+  return genesis;
+};
+
+// recursive
