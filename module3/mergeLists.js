@@ -125,3 +125,14 @@ const mergeLists = (head1, head2) => {
   tail.next = mergeLists(next1, next2);
   return tail;
 };
+
+/*
+APPROACH
+- create a dummy head node in order to keep track and return at end
+- compare the values of the first and second LL current nodes
+- append and progress
+- move tail pointer forward
+- if one of the LL is empty, append the other one to the tail
+*/
+
+// iterative solution
