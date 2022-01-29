@@ -41,3 +41,35 @@ p = Node("p")
 reverse_list(p) # p
 """
 
+# class Node:
+#   def __init__(self, val):
+#     self.val = val
+#     self.next = None
+
+# my approach
+# iterative
+def reverse_list(head):
+  current = head
+  prev = None
+
+  while current is not None:
+    next = current.next
+    current.next = prev
+    prev = current
+    current = next
+  return prev
+
+# recursive
+def reverse_list(head):
+  prev = None
+  return reverse_list_helper(head, prev)
+
+def reverse_list_helper(current, prev):
+  if current is None:
+    return prev
+  next = current.next
+  current.next = prev
+  prev = current
+  current = next
+  return reverse_list_helper(current, prev)
+

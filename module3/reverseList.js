@@ -66,14 +66,22 @@ const reverseList = (head) => {
 // recursive
 const reverseList = (head) => {
   let prev = null;
-  return reverseListHelper(head, prev)
-}
+  return reverseListHelper(head, prev);
+};
 
 const reverseListHelper = (node, prev) => {
   if (node === null) return prev;
-  let next = node.next
-  node.next = prev
-  prev = node
-  node = next
-  return reverseListHelper(node, prev)
-}
+  let next = node.next;
+  node.next = prev;
+  prev = node;
+  node = next;
+  return reverseListHelper(node, prev);
+};
+
+// recursive solution
+const reverseList = (head, prev = null) => {
+  if (head === null) return prev;
+  let next = head.next;
+  head.next = prev;
+  return reverseList(next, head);
+};
