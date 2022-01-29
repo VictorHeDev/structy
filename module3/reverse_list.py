@@ -73,3 +73,10 @@ def reverse_list_helper(current, prev):
   current = next
   return reverse_list_helper(current, prev)
 
+# recursive solution
+def reverse_list(head, prev=None):
+  if head is None:
+    return prev
+  next = head.next
+  head.next = prev
+  return reverse_list(next, head)
