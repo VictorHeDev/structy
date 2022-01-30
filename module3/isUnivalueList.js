@@ -63,6 +63,7 @@ APPROACH
 - increment current = current.next
 */
 
+// iterative
 const isUnivalueList = (head) => {
   let current = head;
   while (current !== null) {
@@ -74,3 +75,10 @@ const isUnivalueList = (head) => {
   return true;
 };
 
+// recursive
+const isUnivalueList = (head, prevVal = null) => {
+  if (head === null) return true;
+  if (prevVal !== null && head.val !== prevVal) return false;
+
+  return isUnivalueList(head.next, head.val)
+}
