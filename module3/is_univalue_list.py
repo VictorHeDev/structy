@@ -37,6 +37,7 @@ is_univalue_list(a) # False
 #     self.val = val
 #     self.next = None
 
+# iterative
 def is_univalue_list(head):
   current = head
   while current is not None:
@@ -45,6 +46,7 @@ def is_univalue_list(head):
     current = current.next
   return True
 
+# recursive
 def is_univalue_list(head):
   prevVal = head.val
   return is_univalue_list_helper(head, prevVal)
@@ -55,3 +57,11 @@ def is_univalue_list_helper(head, prevVal):
   if head.val != prevVal:
     return False
   return is_univalue_list_helper(head.next, prevVal)
+
+# recursive solution
+def is_univalue_list(head, prev_val = None):
+  if head is None:
+    return True
+  if prev_val is not None and head.val != prev_val:
+    return False
+  return is_univalue_list(head.next, head.val)
