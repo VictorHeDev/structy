@@ -30,3 +30,47 @@ b.next = c;
 
 isUnivalueList(a); // false
 */
+
+// class Node {
+//   constructor(val) {
+//     this.val = val;
+//     this.next = null;
+//   }
+// }
+
+// my approach
+// iterative
+const isUnivalueList = (head) => {
+  let current = head;
+
+  while (current.next !== null) {
+    if (current.val !== current.next.val) return false;
+    current = current.next;
+  }
+  return true;
+};
+
+// recursive
+const isUnivalueList = (head) => {
+  if (head.next === null) return true;
+  if (head.val !== head.next.val) return false;
+  return isUnivalueList(head.next);
+};
+
+/*
+APPROACH
+- iterate through LL and check if current.val === head.val
+- increment current = current.next
+*/
+
+const isUnivalueList = (head) => {
+  let current = head;
+  while (current !== null) {
+    if (current.val !== head.val) {
+      return false;
+    }
+    current = current.next;
+  }
+  return true;
+};
+
