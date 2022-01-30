@@ -70,6 +70,7 @@ class Node:
     self.val = val
     self.next = None
 
+# iterative 
 def merge_lists(head_1, head_2):
   dummyHead = Node(None)
   tail = dummyHead
@@ -92,6 +93,7 @@ def merge_lists(head_1, head_2):
 
   return dummyHead.next
 
+# recursive
 def merge_lists(head_1, head_2):
   if head_1 is None and head_2 is None:
     return None
