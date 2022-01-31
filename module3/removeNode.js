@@ -42,3 +42,47 @@ y.next = z;
 removeNode(x, "z");
 // x -> y
 */
+
+// class Node {
+//   constructor(val) {
+//     this.val = val;
+//     this.next = null;
+//   }
+// }
+
+// my approach
+// iterative
+const removeNode = (head, targetVal) => {
+  if (head.val === targetVal) return head.next;
+  let tail = head;
+  let current = head.next;
+
+  while (current !== null) {
+    if (current.val === targetVal) {
+      tail.next = current.next;
+      break;
+    }
+    current = current.next;
+    tail = tail.next;
+  }
+
+  return head;
+};
+
+// recursive
+const removeNode = (head, targetVal) => {
+  if (head.val === targetVal) return head.next;
+  let prev = head;
+  let current = head.next;
+
+  removeNodeHelper(prev, current, targetVal);
+  return head;
+};
+
+const removeNodeHelper = (prev, current, targetVal) => {
+  if (current.val === targetVal) {
+    prev.next = current.next;
+    return;
+  }
+  return removeNodeHelper(prev.next, current.next, targetVal);
+};
