@@ -1,3 +1,4 @@
+"""
 longest streak
 
 Write a function, longest_streak, that takes in the head of a linked list as an argument. The function should return the length of the longest consecutive streak of the same value within the list.
@@ -38,3 +39,26 @@ e.next = f
 # 3 -> 3 -> 3 -> 3 -> 9 -> 9
 
 longest_streak(a) # 4
+"""
+
+# class Node:
+#   def __init__(self, val):
+#     self.val = val
+#     self.next = None
+
+def longest_streak(head):
+  currentNode = head
+  prevVal = None
+  currMax = 0
+  maxStreak = 0
+
+  while currentNode is not None:
+    if currentNode.val == prevVal:
+      currMax += 1
+    else:
+      currMax = 1
+    prevVal = currentNode.val
+    maxStreak = max(currMax, maxStreak)
+    currentNode = currentNode.next
+
+  return maxStreak
