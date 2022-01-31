@@ -68,3 +68,28 @@ const longestStreak = (head) => {
 
   return maximum;
 };
+
+/*
+APPROACH
+- create variables to hold maxStreak, currentStreak, prevVal
+- have a current variable to traverse through the LL
+*/
+const longestStreak = (head) => {
+  let maxStreak = 0;
+  let currentStreak = 0;
+  let currentNode = head;
+  let prevVal = null;
+
+  while (currentNode !== null) {
+    if (currentNode.val === prevVal) {
+      currentStreak += 1;
+    } else {
+      currentStreak = 1;
+    }
+    maxStreak = Math.max(maxStreak, currentStreak);
+    prevVal = currentNode.val;
+    currentNode = currentNode.next;
+  }
+
+  return maxStreak;
+};
