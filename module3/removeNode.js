@@ -86,3 +86,31 @@ const removeNodeHelper = (prev, current, targetVal) => {
   }
   return removeNodeHelper(prev.next, current.next, targetVal);
 };
+
+/*
+APPROACH
+- to make the removal possible, we actually need to reroute the previous node
+- we need 2 pointers to track previous and current
+- check to see if current.val === targetVal
+- to remove current, take prev.next and point to current.next
+*/
+// iterative
+const removeNode = (head, targetVal) => {
+  if (head.val === targetVal) return head.next;
+  let prev = null;
+  let current = head;
+
+  while (current !== null) {
+    if (current.val === targetVal) {
+      prev.next = current.next;
+      break;
+    }
+
+    prev = current;
+    current = current.next;
+  }
+
+  return head;
+};
+
+
