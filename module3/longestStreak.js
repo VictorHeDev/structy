@@ -40,3 +40,31 @@ e.next = f;
 
 longestStreak(a); // 4
 */
+
+// class Node {
+//   constructor(val) {
+//     this.val = val;
+//     this.next = null;
+//   }
+// }
+
+const longestStreak = (head) => {
+  let prev = head;
+  let current = head;
+  let maximum = 0;
+  let currMax = 0;
+
+  while (current !== null) {
+    if (current.val === prev.val) {
+      currMax += 1;
+    } else {
+      maximum = Math.max(currMax, maximum);
+      currMax = 1;
+      prev = current;
+    }
+    current = current.next;
+  }
+  maximum = Math.max(currMax, maximum);
+
+  return maximum;
+};
