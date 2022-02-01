@@ -53,3 +53,27 @@ APPROACH - Iterative with a dummyHead
 - do this until we finish the array
 - after we completed the LL, return dummyHead.next
 */
+
+const createLinkedList = (values) => {
+  const dummyHead = new Node(null);
+  let tail = dummyHead;
+  for (let val of values) {
+    tail.next = new Node(val);
+    tail = tail.next;
+  }
+  return dummyHead.next;
+};
+
+/*
+APPROACH - recursive
+Version 1:
+- base case: if given an empty values list then we want to return an empty LL
+- recursive step: link the head.next to the return value of the recursive step
+- make sure we slice the values array and pass that into the recursive step
+*/
+const createLinkedList = (values) => {
+  if (values.length === 0) return null;
+  const head = new Node(values[0]);
+  head.next = createLinkedList(values.slice(1));
+  return head;
+};
