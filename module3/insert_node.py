@@ -38,3 +38,47 @@ c.next = d
 insert_node(a, 'v', 3)
 # a -> b -> c -> v -> d
 '''
+
+class Node:
+  def __init__(self, val):
+    self.val = val
+    self.next = None
+
+# my approach
+# iterative
+def insert_node(head, value, index):
+  insertionNode = Node(value)
+  count = 0
+  current = head
+
+  if index == 0:
+    insertionNode.next = head
+    return insertionNode
+
+  while current is not None:
+    if count == index - 1:
+      tmp = current.next
+      current.next = insertionNode
+      insertionNode.next = tmp
+
+    current = current.next
+    count += 1
+
+  return head
+
+# recursive
+def insert_node(head, value, index, count=0):
+  if head is None:
+    return None
+  if index == 0:
+    newHead = Node(value)
+    newHead.next = head
+    return newHead
+  if count == index - 1:
+    temp = head.next
+    head.next = Node(value)
+    head.next.next = temp
+    return head
+
+  insert_node(head.next, value, index, count+1)
+  return head
