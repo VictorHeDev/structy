@@ -39,3 +39,36 @@ insertNode(a, 'v', 3);
 // a -> b -> c -> v -> d
 
 */
+
+class Node {
+  constructor(val) {
+    this.val = val;
+    this.next = null;
+  }
+}
+
+// my approach
+// iterative
+const insertNode = (head, value, index) => {
+  if (index === 0) {
+    let newHead = new Node(value);
+    newHead.next = head;
+    return newHead;
+  }
+
+  let current = head;
+  let prev = null;
+  let insertionNode = new Node(value);
+
+  for (let i = 0; i <= index; i++) {
+    if (i === index) {
+      prev.next = insertionNode;
+      insertionNode.next = current;
+    } else {
+      prev = current;
+      current = current.next;
+    }
+  }
+
+  return head;
+};
