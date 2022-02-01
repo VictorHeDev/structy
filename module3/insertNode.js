@@ -50,15 +50,14 @@ class Node {
 // my approach
 // iterative
 const insertNode = (head, value, index) => {
-  if (index === 0) {
-    let newHead = new Node(value);
-    newHead.next = head;
-    return newHead;
-  }
-
   let current = head;
   let prev = null;
   let insertionNode = new Node(value);
+
+  if (index === 0) {
+    insertionNode.next = head;
+    return insertionNode;
+  }
 
   for (let i = 0; i <= index; i++) {
     if (i === index) {
@@ -70,5 +69,60 @@ const insertNode = (head, value, index) => {
     }
   }
 
+  return head;
+};
+
+
+/*
+GENERAL APPROACH
+- set a count variable at the head
+- traverse through the LL
+- when count is 1 less than target index, we can do our insertion
+- set previous.next to the new insertionNode
+- set new insertionNode.next to current
+*/
+
+// iterative
+const insertNode = (head, value, index) => {
+  if (index === 0) {
+    const newHead = new Node(value);
+    newHead.next = head;
+    return newHead;
+  }
+  let count = 0;
+  let current = head;
+
+  while (current !== null) {
+    if (count === index - 1) {
+      const temp = current.next;
+      current.next = new Node(value);
+      current.next.next = temp;
+    }
+
+    count += 1;
+    current = current.next;
+  }
+
+  return head;
+};
+
+// recursive
+const insertNode = (head, value, index, count = 0) => {
+  if (head === null) return null;
+
+  if (index === 0) {
+    const newHead = new Node(value);
+    newHead.next = head;
+    return newHead;
+  }
+
+  if (count === index - 1) {
+    let temp = head.next;
+    head.next = new Node(value);
+    head.next.next = temp;
+    return head;
+  }
+
+  insertNode(head.next, value, index, count + 1);
   return head;
 };
