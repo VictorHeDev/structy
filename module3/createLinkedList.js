@@ -77,3 +77,14 @@ const createLinkedList = (values) => {
   head.next = createLinkedList(values.slice(1));
   return head;
 };
+
+/*
+Version 2:
+- we use an accumulator to keep track of the index in values
+*/
+const createLinkedList = (values, i = 0) => {
+  if (i === values.length) return null;
+  const head = new Node(values[i]);
+  head.next = createLinkedList(values, i + 1);
+  return head;
+};
