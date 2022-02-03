@@ -56,3 +56,20 @@ e.left = g;
 depthFirstValues(a);
 //    -> ['a', 'b', 'd', 'e', 'g', 'c', 'f']
 */
+
+// class Node {
+//   constructor(val) {
+//     this.val = val;
+//     this.left = null;
+//     this.right = null;
+//   }
+// }
+
+// my recursive approach
+const depthFirstValues = (root, arr = []) => {
+  if (root === null) return [];
+  arr.push(root.val);
+  if (root.left) depthFirstValues(root.left, arr);
+  if (root.right) depthFirstValues(root.right, arr);
+  return arr;
+};
