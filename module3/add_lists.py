@@ -65,3 +65,27 @@ def add_lists(head_1, head_2, carry=0):
   resultNode.next = add_lists(next_1, next_2, nextCarry)
 
   return resultNode
+
+# iterative
+def add_lists(head_1, head_2):
+  dummyHead = Node(None)
+  tail = dummyHead
+  carry = 0
+  current_1 = head_1
+  current_2 = head_2
+
+  while current_1 is not None or current_2 is not None or carry == 1:
+    val_1 = 0 if current_1 is None else current_1.val
+    val_2 = 0 if current_2 is None else current_2.val
+
+    sum = val_1 + val_2 + carry
+    carry = 1 if sum > 9 else 0
+    digit = sum % 10
+
+    current_1 = None if current_1 is None else current_1.next
+    current_2 = None if current_2 is None else current_2.next
+
+    tail.next = Node(digit)
+    tail = tail.next
+
+  return dummyHead.next
