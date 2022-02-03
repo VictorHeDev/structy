@@ -90,3 +90,22 @@ const depthFirstValues = (root) => {
 
   return result;
 };
+
+/*
+APPROACH
+- take in the root of a binary tree
+- add the root node in a collection (use a stack)
+- pop the node off the stack and call it "current"
+- check if current has left and right children
+- if it does then add the children to the stack
+- *** remember to check if a child exists before pushing it to the stack
+- continue the loop until the stack is empty
+- return the resulting array
+*/
+// recursive solution
+const depthFirstValues = (root) => {
+  if (root === null) return [];
+  const leftValues = depthFirstValues(root.left);
+  const rightValues = depthFirstValues(root.right);
+  return [root.val, ...leftValues, ...rightValues];
+};
