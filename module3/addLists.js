@@ -41,3 +41,18 @@ b2.next = b3;
 addLists(a1, b1);
 // 5 -> 7 -> 9
 */
+
+/*
+APPROACH
+- take in 2 LL as inputs
+- take in reversed number LL and return a reversed LL representing the sum
+1. If the lengths of both LL are the same:
+- traverse like we usually do and make new nodes
+- connect previous node to current node
+2. If the lengths of LLs are different
+- when one LL runs out of nodes, treat it as though the null node's value is 0
+3. If we need to handle a carry
+- Bring a one digit over to the next calculation
+4. What if we need to handle a final carry?
+- need one final check for if we hit the ends of the LLs and we sum our carry
+*/
