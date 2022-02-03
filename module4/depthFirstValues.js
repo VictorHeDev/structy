@@ -73,3 +73,20 @@ const depthFirstValues = (root, arr = []) => {
   if (root.right) depthFirstValues(root.right, arr);
   return arr;
 };
+
+// my iterative approach
+const depthFirstValues = (root) => {
+  if (root === null) return [];
+  let stack = [root];
+  let result = [];
+
+  while (stack.length) {
+    candidate = stack.pop();
+    result.push(candidate.val);
+
+    if (candidate.right) stack.push(candidate.right);
+    if (candidate.left) stack.push(candidate.left);
+  }
+
+  return result;
+};
