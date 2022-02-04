@@ -69,7 +69,7 @@ def depth_first_values(root):
   stack = [ root ]
   result = []
 
-  while len(stack):
+  while stack:
     current = stack.pop()
     result.append(current.val)
 
