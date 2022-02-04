@@ -56,3 +56,26 @@ f.right = h;
 breadthFirstValues(a);
 //   -> ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h']
 */
+
+// class Node {
+//   constructor(val) {
+//     this.val = val;
+//     this.left = null;
+//     this.right = null;
+//   }
+// }
+
+const breadthFirstValues = (root) => {
+  if (root === null) return [];
+  let queue = [root];
+  result = [];
+
+  while (queue.length) {
+    current = queue.shift();
+    result.push(current.val);
+
+    if (current.left) queue.push(current.left);
+    if (current.right) queue.push(current.right);
+  }
+  return result;
+};
