@@ -79,3 +79,12 @@ const breadthFirstValues = (root) => {
   }
   return result;
 };
+
+/*
+APPROACH
+- init a queue in order to travel through the tree in a breadth first order
+- pop an item off of the queue and add that item's value to the result array
+- check if that item has a left or right child and add them to the queue
+- do this until the queue is empty
+- return the result array
+*/
