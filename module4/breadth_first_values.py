@@ -80,3 +80,28 @@ def breadth_first_values(root):
 
   return result
 
+'''
+APPROACH
+- it is much easier to "process" the value as it leaves the queue
+'''
+
+# use a deque instead
+from collections import deque
+
+def breadth_first_values(root):
+  if root is None:
+    return []
+  values = []
+  queue = deque([root])
+
+  while queue:
+    current = queue.popleft()
+    values.append(current.val)
+
+    if current.left:
+      queue.append(current.left)
+
+    if current.right:
+      queue.append(current.right)
+
+  return values
