@@ -55,3 +55,34 @@ depth_first_values(a)
 #   -> ['a', 'b', 'd', 'e', 'g', 'c', 'f']
 '''
 
+# class Node:
+#   def __init__(self, val):
+#     self.val = val
+#     self.left = None
+#     self.right = None
+
+# my approach
+# iterative
+def depth_first_values(root):
+  if root is None:
+    return []
+  stack = [ root ]
+  result = []
+
+  while len(stack):
+    current = stack.pop()
+    result.append(current.val)
+
+    if current.right:
+      stack.append(current.right)
+    if current.left:
+      stack.append(current.left)
+  return result
+
+# recursive
+def depth_first_values(root):
+  if root is None:
+    return []
+  leftValues = depth_first_values(root.left)
+  rightValues = depth_first_values(root.right)
+  return [root.val, *leftValues, *rightValues]
