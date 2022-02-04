@@ -56,3 +56,27 @@ f.right = h
 breadth_first_values(a)
 #   -> ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h']
 '''
+
+# class Node:
+#   def __init__(self, val):
+#     self.val = val
+#     self.left = None
+#     self.right = None
+
+def breadth_first_values(root):
+  if root is None:
+    return []
+  result = []
+  queue = [ root ]
+
+  while queue:
+    current = queue.pop()
+    result.append(current.val)
+
+    if current.left:
+      queue.insert(0, current.left)
+    if current.right:
+      queue.insert(0, current.right)
+
+  return result
+
