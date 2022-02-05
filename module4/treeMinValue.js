@@ -50,3 +50,33 @@ c.right = f;
 
 treeMinValue(a); // -> 3
 */
+
+// class Node {
+//   constructor(val) {
+//     this.val = val;
+//     this.left = null;
+//     this.right = null;
+//   }
+// }
+
+// BFS
+const treeMinValue = (root) => {
+  let resultMin = Infinity;
+  let queue = [root];
+
+  while (queue.length) {
+    current = queue.pop();
+    resultMin = Math.min(current.val, resultMin);
+
+    if (current.left) queue.unshift(current.left);
+    if (current.right) queue.unshift(current.right);
+  }
+
+  return resultMin;
+};
+
+// DFS
+const treeMinValue = (root) => {
+  if (root === null) return Infinity;
+  return Math.min(root.val, treeMinValue(root.left), treeMinValue(root.right));
+};
