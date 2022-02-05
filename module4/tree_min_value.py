@@ -49,3 +49,34 @@ c.right = f
 
 tree_min_value(a) # -> 3
 '''
+
+# class Node:
+#   def __init__(self, val):
+#     self.val = val
+#     self.left = None
+#     self.right = None
+
+# DFS
+def tree_min_value(root):
+  if root is None:
+    return float('inf')
+  left_min_value = tree_min_value(root.left)
+  right_min_value = tree_min_value(root.right)
+  return min(root.val, left_min_value, right_min_value)
+
+# BFS
+from collections import deque
+def tree_min_value(root):
+  queue = deque([root])
+  smallest = float('inf')
+
+  while queue:
+    current = queue.popleft()
+    smallest = min(current.val, smallest)
+
+    if current.left:
+      queue.append(current.left)
+    if current.right:
+      queue.append(current.right)
+
+  return smallest
