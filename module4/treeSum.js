@@ -54,3 +54,53 @@ f.right = h;
 
 treeSum(a); // -> 10
 */
+
+// class Node {
+//   constructor(val) {
+//     this.val = val;
+//     this.left = null;
+//     this.right = null;
+//   }
+// }
+
+// recursive DFS
+const treeSum = (root) => {
+  if (root === null) return 0;
+  let leftSum = treeSum(root.left);
+  let rightSum = treeSum(root.right);
+  return root.val + leftSum + rightSum;
+};
+
+// iterative DFS
+const treeSum = (root) => {
+  if (root === null) return 0;
+  let stack = [root];
+  let sum = 0;
+
+  while (stack.length) {
+    current = stack.pop();
+    sum += current.val;
+
+    if (current.right) stack.push(current.right);
+    if (current.left) stack.push(current.left);
+  }
+
+  return sum;
+};
+
+// iterative BFS
+const treeSum = (root) => {
+  if (root === null) return 0;
+  let queue = [root];
+  let sum = 0;
+
+  while (queue.length) {
+    current = queue.pop();
+    sum += current.val;
+
+    if (current.left) queue.unshift(current.left);
+    if (current.right) queue.unshift(current.right);
+  }
+
+  return sum;
+};
