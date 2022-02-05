@@ -59,6 +59,17 @@ treeMinValue(a); // -> 3
 //   }
 // }
 
+/*
+APPROACH
+- assume that the tree is not empty
+
+RECURSIVE
+- let the return value for null nodes to be Infinity
+- that way we can compare the minimum values and return up the tree
+- given the smallest value in the left subtree and the smallest value in the right subtree
+  and we compare those values with the current node, return the minimum value amongst the tree
+*/
+
 // BFS
 const treeMinValue = (root) => {
   let resultMin = Infinity;
