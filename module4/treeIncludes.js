@@ -80,6 +80,13 @@ treeIncludes(a, "n"); // -> false
 //   }
 // }
 
+/*
+APPROACH
+- in the affirmative base case if we find the target then we want to return true
+- in the negatory base case, we want to return false if we hit a null node
+- use the logical OR operator 
+*/
+
 // DFS
 const treeIncludes = (root, target) => {
   if (root === null) return false;
