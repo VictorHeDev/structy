@@ -54,3 +54,19 @@ e.right = g;
 
 maxPathSum(a); // -> 59
 */
+
+/*
+APPROACH
+- we need to write code to compute the sums from root to leafs
+- usually recursion is the best way to go for "path finding" algorithms
+- determining paths
+- end at a leaf node (base case)
+
+*/
+
+// DFS
+const maxPathSum = (root) => {
+  if (root === null) return -Infinity;
+  if (root.left === null && root.right === null) return root.val;
+  return root.val + Math.max(maxPathSum(root.left), maxPathSum(root.right));
+};
