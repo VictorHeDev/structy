@@ -103,3 +103,29 @@ def path_finder(root, target):
 
   return None
 
+# DFS with push
+def path_finder(root, target):
+  result = path_finder_helper(root, target)
+
+  if result is None:
+    return None
+  else:
+    return result[::-1]
+
+def path_finder_helper(root, target):
+  if root is None:
+    return None
+  if root.val == target:
+    return [ root.val ]
+
+  left_path = path_finder_helper(root.left, target)
+  if left_path is not None:
+    left_path.append(root.val)
+    return left_path
+
+  right_path = path_finder_helper(root.right, target)
+  if right_path is not None:
+    right_path.append(root.val)
+    return right_path
+
+  return None
