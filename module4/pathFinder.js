@@ -79,3 +79,34 @@ f.right = h;
 
 pathFinder(a, "c"); // -> ['a', 'c']
 */
+
+/*
+APPROACH
+- we want to return an array with all the stops starting from the root to the target
+- affirmative base case: we find what we are looking for so we want to return an array with only that element value
+- if we don't find what we're looking for, (null node) let's return null
+- if we grab what we are looking for, when we go up a level in the tree we need to put that new element
+  in the return array (add that to the front)
+*/
+
+// class Node {
+//   constructor(val) {
+//     this.val = val;
+//     this.left = null;
+//     this.right = null;
+//   }
+// }
+
+// DFS O(n^2) time, O(n) space
+const pathFinder = (root, target) => {
+  if (root === null) return null;
+  if (root.val === target) return [root.val];
+
+  const leftPath = pathFinder(root.left, target);
+  if (leftPath !== null) return [root.val, ...leftPath];
+
+  const rightPath = pathFinder(root.right, target);
+  if (rightPath !== null) return [root.val, ...rightPath];
+
+  return null;
+};
