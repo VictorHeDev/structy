@@ -66,3 +66,17 @@ APPROACH
   - THIS WILL BE THE BASE CASE ^
 - when we move up and compare, we want to take the max and add a +1
 */
+
+// class Node {
+//   constructor(val) {
+//     this.val = val;
+//     this.left = null;
+//     this.right = null;
+//   }
+// }
+
+// BFS
+const howHigh = (node) => {
+  if (node === null) return -1;
+  return 1 + Math.max(howHigh(node.left), howHigh(node.right));
+};
