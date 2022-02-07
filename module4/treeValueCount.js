@@ -48,3 +48,48 @@ c.right = f;
 
 treeValueCount(a,  12); // -> 2
 */
+
+/*
+APPROACH RECURSIVE
+- if it is a match, we need to +1
+- if it is a null node, we need to return 0
+*/
+
+// class Node {
+//   constructor(val) {
+//     this.val = val;
+//     this.left = null;
+//     this.right = null;
+//   }
+// }
+
+// BFS
+const treeValueCount = (root, target) => {
+  if (root === null) return 0;
+  let counter = 0;
+  let queue = [root];
+
+  while (queue.length) {
+    current = queue.pop();
+    if (current.val === target) counter += 1;
+
+    if (current.left) queue.unshift(current.left);
+    if (current.right) queue.unshift(current.right);
+  }
+
+  return counter;
+};
+
+// DFS
+const treeValueCount = (root, target) => {
+  if (root === null) return 0;
+  if (root.val === target) {
+    return (
+      1 + treeValueCount(root.left, target) + treeValueCount(root.right, target)
+    );
+  } else {
+    return (
+      0 + treeValueCount(root.left, target) + treeValueCount(root.right, target)
+    );
+  }
+};
