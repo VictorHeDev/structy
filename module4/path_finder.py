@@ -80,3 +80,26 @@ f.right = h
 path_finder(a, "c") # -> ['a', 'c']
 '''
 
+# class Node:
+#   def __init__(self, val):
+#     self.val = val
+#     self.left = None
+#     self.right = None
+
+# DFS
+def path_finder(root, target):
+  if root is None:
+    return None
+  if root.val == target:
+    return [ root.val ]
+
+  left_path = path_finder(root.left, target)
+  if left_path:
+    return [ root.val, *left_path ]
+
+  right_path = path_finder(root.right, target)
+  if right_path:
+    return [ root.val, *right_path ]
+
+  return None
+
