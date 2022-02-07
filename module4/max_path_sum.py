@@ -54,3 +54,15 @@ e.right = g
 
 max_path_sum(a) # -> 59
 '''
+'''
+APPROACH
+- most tree problems that need to return a path are usually best solved with recursion
+
+'''
+def max_path_sum(root):
+  if root is None:
+    return float('-inf')
+  if root.left is None and root.right is None:
+    return root.val
+  max_child_path_sum = max(max_path_sum(root.left), max_path_sum(root.right))
+  return root.val + max_child_path_sum
