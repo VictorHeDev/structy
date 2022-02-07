@@ -98,6 +98,8 @@ APPROACH
 // }
 
 // DFS O(n^2) time, O(n) space
+// sometimes array methods are iterating under the hood
+// the spread operator is adds O(n) -> O(n^2) result operation
 const pathFinder = (root, target) => {
   if (root === null) return null;
   if (root.val === target) return [root.val];
