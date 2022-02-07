@@ -56,3 +56,13 @@ e.left = g
 
 howHigh(a); // -> 3
 */
+
+/*
+APPROACH
+- we want to take in the root of a binary tree and output the height
+- the height of a tree is the number of edges from the root to the farthest leaf
+- if we have a single node, the height is 0
+- if we have an empty node, the height is -1
+  - THIS WILL BE THE BASE CASE ^
+- when we move up and compare, we want to take the max and add a +1
+*/
