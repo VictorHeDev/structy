@@ -71,3 +71,17 @@ allTreePaths(a); // ->
 //   [ 'a', 'c', 'f', 'i' ]
 // ]
 */
+
+/*
+APPROACH
+- take in a binary tree and return a 2D array where each subarray
+  - represents a root to leaf path
+- need a base case about hitting a leaf node
+  - we know that we hit a leaf node if it has no left and right children
+  - if we treat a single node as a tree, we want to return an array with only that node's value
+  - we will have an array of subarrays
+- when we go up in the tree, we want to add the current element to the beginning of the existing subarrays
+- if we have a null node, we want to just return an empty array
+- when we bring the subarrays up one level, we need to concat them all together and add the current element
+- the ordering of the base cases matter
+*/
