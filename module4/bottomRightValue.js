@@ -56,3 +56,35 @@ e.right = h;
 
 bottomRightValue(a); // -> 6
 */
+
+// my approach BFS
+// class Node {
+//   constructor(val) {
+//     this.val = val;
+//     this.left = null;
+//     this.right = null;
+//   }
+// }
+
+// BFS
+const bottomRightValue = (root) => {
+  let queue = [root];
+  let current = null;
+
+  while (queue.length > 0) {
+    current = queue.pop();
+
+    if (current.left) queue.unshift(current.left);
+    if (current.right) queue.unshift(current.right);
+  }
+
+  return current.val;
+};
+
+/*
+APPROACH
+- we take in the head of a binary tree and we want to output the deepest right leaf
+- go down by levels -> think about using BFS!
+- we want to keep adding to the queue and keep track of the "current" that is popped off
+- the LAST element to be popped off the queue will be the deepest and most rightmost leaf
+*/
