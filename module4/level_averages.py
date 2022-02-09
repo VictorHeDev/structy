@@ -62,6 +62,7 @@ level_averages(a) # -> [ 5, 32.5, 17.5, 2 ]
 
 # BFS
 from collections import deque
+from statistics import mean
 
 def level_averages(root):
   if root is None:
@@ -69,7 +70,6 @@ def level_averages(root):
 
   queue = deque([ (root, 0) ])
   levels = []
-  averages = []
 
   while queue:
     node, level_num = queue.popleft()
@@ -84,10 +84,7 @@ def level_averages(root):
     if node.right:
       queue.append((node.right, level_num + 1))
 
-  for level in levels:
-    averages.append(find_average(level))
-
-  return averages
+  return [ mean(level) for level in levels ]
 
 def find_average(numsArr):
   return sum(numsArr) / len(numsArr)
@@ -97,7 +94,6 @@ def level_averages(root):
   levels = []
   averages = []
   _level_averages(root, levels, 0)
-
 
   for level in levels:
     averages.append(find_average(level))
