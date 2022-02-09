@@ -52,3 +52,69 @@ e.right = g
 
 level_averages(a) # -> [ 5, 32.5, 17.5, 2 ]
 '''
+
+# class Node:
+#   def __init__(self, val):
+#     self.val = val
+#     self.left = None
+#     self.right = None
+
+
+# BFS
+from collections import deque
+
+def level_averages(root):
+  if root is None:
+    return []
+
+  queue = deque([ (root, 0) ])
+  levels = []
+  averages = []
+
+  while queue:
+    node, level_num = queue.popleft()
+
+    if len(levels) == level_num:
+      levels.append([ node.val ])
+    else:
+      levels[level_num].append(node.val)
+
+    if node.left:
+      queue.append((node.left, level_num + 1))
+    if node.right:
+      queue.append((node.right, level_num + 1))
+
+  for level in levels:
+    averages.append(find_average(level))
+
+  return averages
+
+def find_average(numsArr):
+  return sum(numsArr) / len(numsArr)
+
+# DFS
+def level_averages(root):
+  levels = []
+  averages = []
+  _level_averages(root, levels, 0)
+
+
+  for level in levels:
+    averages.append(find_average(level))
+
+  return averages
+
+def _level_averages(root, levels, level_num):
+  if root is None:
+    return
+
+  if len(levels) == level_num:
+    levels.append([ root.val ])
+  else:
+    levels[level_num].append(root.val)
+
+  _level_averages(root.left, levels, level_num + 1)
+  _level_averages(root.right, levels, level_num + 1)
+
+def find_average(numsArr):
+  return sum(numsArr) / len(numsArr)
