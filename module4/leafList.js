@@ -88,3 +88,43 @@ APPROACH
 - when we reach a leaf node, add it to the node value to the leaves array
 - return the leaves array
 */
+
+// class Node {
+//   constructor(val) {
+//     this.val = val;
+//     this.left = null;
+//     this.right = null;
+//   }
+// }
+
+// DFS recursive
+const leafList = (root) => {
+  let leaves = [];
+  leafListHelper(root, leaves);
+  return leaves;
+};
+
+const leafListHelper = (node, leaves) => {
+  if (node === null) return;
+  if (node.left === null && node.right === null) leaves.push(node.val);
+  leafListHelper(node.left, leaves);
+  leafListHelper(node.right, leaves);
+};
+
+// DFS iterative
+const leafList = (root) => {
+  if (root === null) return [];
+  let stack = [root];
+  let leaves = [];
+
+  while (stack.length) {
+    let current = stack.pop();
+    if (current.left === null && current.right === null)
+      leaves.push(current.val);
+
+    if (current.right) stack.push(current.right);
+    if (current.left) stack.push(current.left);
+  }
+
+  return leaves;
+};
