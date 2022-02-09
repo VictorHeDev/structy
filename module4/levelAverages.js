@@ -82,6 +82,13 @@ f.right = h;
 levelAverages(a); // -> [ -1, -5.5, 14, -1.5 ]
 */
 
+/*
+APPROACH
+- take in a binary tree and return an array containing the average of the numbers in each level
+- variation of the tree levels problem we just did
+- 
+*/
+
 // class Node {
 //   constructor(val) {
 //     this.val = val;
