@@ -82,3 +82,23 @@ e.right = g
 leaf_list(a) # -> [ 20, 1, 3, 54 ]
 '''
 
+# class Node:
+#   def __init__(self, val):
+#     self.val = val
+#     self.left = None
+#     self.right = None
+
+def leaf_list(root):
+  leaves = []
+  fill_leaves(root, leaves)
+  return leaves
+
+def fill_leaves(root, leaves):
+  if root is None:
+    return
+
+  if root.left is None and root.right is None:
+    leaves.append(root.val)
+
+  fill_leaves(root.left, leaves)
+  fill_leaves(root.right, leaves)
