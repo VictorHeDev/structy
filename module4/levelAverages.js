@@ -81,3 +81,77 @@ f.right = h;
 
 levelAverages(a); // -> [ -1, -5.5, 14, -1.5 ]
 */
+
+// class Node {
+//   constructor(val) {
+//     this.val = val;
+//     this.left = null;
+//     this.right = null;
+//   }
+// }
+
+// BFS
+const levelAverages = (root) => {
+  if (root === null) return [];
+
+  let levels = [];
+  let averages = [];
+  let queue = [{ node: root, levelNum: 0 }];
+
+  while (queue.length) {
+    let { node, levelNum } = queue.pop();
+
+    if (levels.length == levelNum) {
+      levels.push([node.val]);
+    } else {
+      levels[levelNum].push(node.val);
+    }
+
+    if (node.left) queue.unshift({ node: node.left, levelNum: levelNum + 1 });
+    if (node.right) queue.unshift({ node: node.right, levelNum: levelNum + 1 });
+  }
+
+  for (let level of levels) {
+    averages.push(avg(level));
+  }
+
+  return averages;
+};
+
+const avg = (array) => {
+  let sum = 0;
+  for (let num of array) sum += num;
+  return sum / array.length;
+};
+
+// DFS
+const levelAverages = (root) => {
+  let levels = [];
+  let averages = [];
+  fillLevels(root, levels, 0);
+
+  for (let level of levels) {
+    averages.push(avg(level));
+  }
+
+  return averages;
+};
+
+const fillLevels = (root, levels, levelNum) => {
+  if (root === null) return;
+
+  if (levels.length === levelNum) {
+    levels.push([root.val]);
+  } else {
+    levels[levelNum].push(root.val);
+  }
+
+  fillLevels(root.left, levels, levelNum + 1);
+  fillLevels(root.right, levels, levelNum + 1);
+};
+
+const avg = (array) => {
+  let sum = 0;
+  for (let num of array) sum += num;
+  return sum / array.length;
+};
