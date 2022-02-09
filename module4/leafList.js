@@ -81,3 +81,10 @@ e.right = g;
 
 leafList(a); // -> [ 20, 1, 3, 54 ]
 */
+
+/*
+APPROACH
+- use a DFS approach to traverse as keep as possible
+- when we reach a leaf node, add it to the node value to the leaves array
+- return the leaves array
+*/
