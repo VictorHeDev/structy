@@ -1,5 +1,5 @@
 # DFS iterative
-def depth_first_print(graph, start):
+def depth_first_iter_print(graph, start):
   stack = [ start ]
 
   while len(stack) > 0:
@@ -10,7 +10,12 @@ def depth_first_print(graph, start):
     for neighbor in graph[current]:
       stack.append(neighbor)
 
+# DFS recursive
+def depth_first_recursive_print(graph, current):
+  print(current)
 
+  for neighbor in graph[current]:
+    depth_first_iter_print(graph, neighbor)
 
 
 graph = {
@@ -22,4 +27,4 @@ graph = {
   'f': []
 }
 
-print(depth_first_print(graph, 'a'))
+print(depth_first_iter_print(graph, 'a'))
