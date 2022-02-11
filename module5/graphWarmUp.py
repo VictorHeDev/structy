@@ -17,6 +17,18 @@ def depth_first_recursive_print(graph, current):
   for neighbor in graph[current]:
     depth_first_iter_print(graph, neighbor)
 
+# BFS
+from collections import deque
+def breadth_first_print(graph, start):
+  queue = deque([ start ])
+
+  while queue:
+    current = queue[0]
+    print(current)
+    queue.popleft()
+
+    for neighbor in graph[current]:
+      queue.append(neighbor)
 
 graph = {
   'a': ['b', 'c'],
@@ -27,4 +39,8 @@ graph = {
   'f': []
 }
 
-print(depth_first_iter_print(graph, 'a'))
+# print(depth_first_iter_print(graph, 'a'))
+# print('---------')
+# print(depth_first_recursive_print(graph, 'a'))
+# print('---------')
+print(breadth_first_print(graph, 'a'))
