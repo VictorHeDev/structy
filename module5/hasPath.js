@@ -43,3 +43,19 @@ const graph = {
 
 hasPath(graph, 'i', 'h'); // true
 */
+
+// BFS
+const hasPath = (graph, src, dst) => {
+  let queue = [src];
+
+  while (queue.length) {
+    current = queue.pop();
+    if (current === dst) return true;
+
+    for (let neighbor of graph[current]) {
+      if (ele !== null) queue.unshift(neighbor);
+    }
+  }
+
+  return false;
+};
