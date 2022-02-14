@@ -40,3 +40,13 @@ const edges = [
 
 shortestPath(edges, 'a', 'e'); // -> 3
 */
+
+/*
+APPROACH
+- create adjacency list from the edges given
+- DFS vs. BFS -> we want to use BFS because it is better for "shortest path"
+- on our queue, we want to initialize our starting node AND the starting distance
+  - for example, it will look like (node, distance)
+- we also want a visited Set because we have an undirected graph
+
+*/
