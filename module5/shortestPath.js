@@ -48,5 +48,41 @@ APPROACH
 - on our queue, we want to initialize our starting node AND the starting distance
   - for example, it will look like (node, distance)
 - we also want a visited Set because we have an undirected graph
-
+- cycle protection
 */
+
+const shortestPath = (edges, nodeA, nodeB) => {
+  const graph = buildGraph(edges);
+  const queue = [[nodeA, 0]];
+  const visited = new Set([nodeA]);
+
+  while (queue.length) {
+    let [node, distance] = queue.shift();
+
+    if (node === nodeB) return distance;
+
+    for (let neighbor of graph[node]) {
+      if (!visited.has(neighbor)) {
+        visited.add(neighbor);
+        queue.push([neighbor, distance + 1]);
+      }
+    }
+  }
+
+  return -1;
+};
+
+const buildGraph = (edges) => {
+  const graph = {};
+
+  for (let edge of edges) {
+    let [a, b] = edge;
+
+    if (!(a in graph)) graph[a] = [];
+    if (!(b in graph)) graph[b] = [];
+    graph[a].push(b);
+    graph[b].push(a);
+  }
+
+  return graph;
+};
