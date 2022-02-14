@@ -38,3 +38,35 @@ connectedComponentsCount({
   2: [1]
 }); // -> 3
 */
+
+/*
+APPROACH
+- iterate through the adjacency list
+- use DFS to traverse through the current node's neighbors
+- add those nodes to a visited Set
+- after the current nodes have been traversed via DFS, continue to the next node in the adjacency list
+*/
+
+const connectedComponentsCount = (graph) => {
+  let visited = new Set();
+  let count = 0;
+
+  for (let node in graph) {
+    if (explore(graph, node, visited) === true) {
+      count += 1;
+    }
+  }
+
+  return count;
+};
+
+const explore = (graph, current, visited) => {
+  if (visited.has(String(current))) return false;
+  visited.add(String(current));
+
+  for (neighbor of graph[current]) {
+    explore(graph, neighbor, visited);
+  }
+
+  return true;
+};
