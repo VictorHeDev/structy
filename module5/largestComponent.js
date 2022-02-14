@@ -38,3 +38,9 @@ largestComponent({
   2: ['1']
 }); // -> 5
 */
+
+/*
+APPROACH
+- we need to iterate through the nodes of the adjacency list
+- we can also use a DFS to traverse through the node components (and count)
+*/
