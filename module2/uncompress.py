@@ -29,6 +29,7 @@ def uncompress(s):
   result = []
   i = 0
   j = 0
+
   while j < len(s):
     if s[j] in numbers:
       j += 1
