@@ -14,14 +14,14 @@ Strategy:
 
 # brute force approach
 def uncompress(s):
-  resultArr = []
+  res = []
   i = 0
 
   for j in range(len(s)):
     if s[j].isalpha():
-      resultArr.append(int(s[i:j]) * s[j])
+      res.append(int(s[i:j]) * s[j])
       i = j + 1
-  return "".join(resultArr)
+  return "".join(res)
 
 # solution
 def uncompress(s):
