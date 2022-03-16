@@ -1,37 +1,63 @@
+from collections import deque
+
 def best_bridge(grid):
-  import collections
+  '''
+  STRAT:
+  - find the coordinates of one island first and save it to a visited set
+  - then use BFS to iterate through each node in the visited set
+  - compare the shortest path lengths and return the shortest bridge
+  - account by off by one error 
+  '''
+  main_island = None
 
-  dires = [(0,1), (1,0), (-1,0), (0,-1)]
-  queue = collections.deque([])
-  visited = set()
-
-  break_flag = False
-  for i in range(len(grid)):
-    if break_flag == True:
-      break
-    for j in range(len(grid[0])):
-      if grid[i][j] == 'L':
-        queue.append((i, j, 0))
-        break_flag = True
+  for r in range(len(grid)):
+    for c in range(len(grid[0])):
+      potential_island = traverse_island(grid, r, c, set())
+      if len(potential_island) > 0:
+        main_island = potential_island
         break
 
-  def find_initial_island(row, col):
-    for dire in dires:
-      new_row, new_col = dire[0] + row, dire[1] + col
-      if 0 <= new_row < len(grid) and 0 <= new_col < len(grid[0]) and (new_row, new_col) not in visited and grid[new_row][new_col] == 'L':
-        queue.append((new_row, new_col, 0))
-        visited.add((new_row, new_col))
-        find_initial_island(new_row, new_col)
-
-  find_initial_island(queue[0][0], queue[0][1])
+  visited = set(main_island)
+  queue = deque([])
+  for pos in main_island:
+    r, c = pos
+    queue.append((r, c, 0))
 
   while queue:
-    spot = queue.popleft()
-    row, col, steps = spot[0], spot[1], spot[2]
-    visited.add((row, col))
-    if grid[row][col] == 'L' and steps != 0:
-      return steps - 1
-    for dire in dires:
-      new_row, new_col = dire[0] + row, dire[1] + col
-      if 0 <= new_row < len(grid) and 0 <= new_col < len(grid[0]) and (new_row, new_col) not in visited:
-        queue.append((new_row, new_col, steps+1))
+    r, c, distance = queue.popleft()
+    if grid[r][c] == 'L' and (r, c) not in main_island:
+      return distance - 1
+
+    deltas = [(1, 0), (-1, 0), (0, 1), (0, -1)]
+    for delta in deltas:
+      dx, dy = delta
+      neighbor_x, neighbor_y = r + dx, c + dy
+      if is_inbounds(grid, neighbor_x, neighbor_y) and (neighbor_x, neighbor_y) not in visited:
+        visited.add((neighbor_x, neighbor_y))
+        queue.append((neighbor_x, neighbor_y, distance + 1))
+
+
+
+def traverse_island(grid, row, col, visited):
+  if not is_inbounds(grid, row, col) or grid[row][col] == 'W':
+    return visited
+
+  pos = (row, col)
+  if pos in visited:
+    return visited
+
+  visited.add(pos)
+  traverse_island(grid, row - 1, col, visited)
+  traverse_island(grid, row + 1, col, visited)
+  traverse_island(grid, row, col - 1, visited)
+  traverse_island(grid, row, col + 1, visited)
+
+  return visited
+
+
+def is_inbounds(grid, r, c):
+  row_inbounds = 0 <= r < len(grid)
+  col_inbounds = 0 <= c < len(grid[0])
+  return row_inbounds and col_inbounds
+
+
