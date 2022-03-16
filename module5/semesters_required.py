@@ -1,26 +1,60 @@
+from collections import defaultdict
 def semesters_required(num_courses, prereqs):
-  def build_graph(prereqs):
-    graph = {}
-    for courses in prereqs:
-      prereq, higher_course = courses[0], courses[1]
-      if prereq not in graph:
-        graph[prereq] = []
-      if higher_course not in graph:
-        graph[higher_course] = []
-      graph[higher_course].append(prereq)
-    return graph
+  '''
+  INPUTS:
+  int num_courses
+  list of tuples prereqs
+  we actually want to use a maximum number traversal -> DFS
+  directed graph, but is it acyclic?
 
-  graph = build_graph(prereqs)
+  STRAT:
+  can we start from each starting node in adjacency list and then
+  traverse using DFS -> and then find the min and save to variable
+  which will then return at the end?
+  we can start from the end (neighbors arr is empty), with value of 1
+  call upon backwards like the last problem
+  '''
 
-  def max_traverse(node):
-    max_count = 1
-    for neib in graph[node]:
-      max_count = max(max_count, 1 + max_traverse(neib))
-    return max_count
+  graph = build_graph(num_courses, prereqs)
+  distances = {}
+  longest = 0
 
-  semesters = 1
+  for course in graph:
+    if len(graph[course]) == 0:
+      distances[course] = 1
 
-  for key in graph.keys():
-    semesters = max(semesters, max_traverse(key))
+  for course in graph:
+    traverse_distance(graph, course, distances)
 
-  return semesters
+  return max(distances.values())
+
+def traverse_distance(graph, node, distances):
+  if node in distances:
+    return distances[node]
+
+  max_distance = 0
+  for neighbor in graph[node]:
+    neighbor_distance = traverse_distance(graph, neighbor, distances)
+    if neighbor_distance > max_distance:
+      max_distance = neighbor_distance
+  distances[node] = 1 + max_distance
+  return distances[node]
+
+
+def build_graph(num_courses, prereqs):
+  graph = {}
+  for course in range(0, num_courses):
+    graph[course] = []
+
+  for prereq in prereqs:
+    a, b = prereq
+    graph[a].append(b)
+
+  return graph
+
+
+
+
+
+
+
