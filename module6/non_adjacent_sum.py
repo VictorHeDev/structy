@@ -20,3 +20,20 @@ def _non_adjacent_sum(nums):
   exclude_first = _non_adjacent_sum(nums[1:])
   return max(include_first, exclude_first)
 
+# memoized
+def non_adjacent_sum(nums):
+  return _non_adjacent_sum(nums, 0, {})
+
+def _non_adjacent_sum(nums, i, memo):
+  if i in memo:
+    return memo[i]
+  # use i to represent the starting idx instead of slicing
+  if i >= len(nums):
+    return 0
+
+  include_first = nums[i] + _non_adjacent_sum(nums, i + 2, memo)
+  exclude_first = _non_adjacent_sum(nums, i + 1, memo)
+
+  memo[i] = max(include_first, exclude_first)
+  return memo[i]
+
