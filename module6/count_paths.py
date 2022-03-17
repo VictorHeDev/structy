@@ -1,21 +1,20 @@
-def count_paths(grid):
-  for i in range(len(grid)):
-    if grid[i][0] != "X":
-      grid[i][0] = 1
-    else:
-      break
-  for i in range(len(grid[0])):
-    if grid[0][i] != "X":
-      grid[0][i] = 1
-    else:
-      break
-  for i in range(1, len(grid)):
-    for j in range(1, len(grid[0])):
-      total = 0
-      if grid[i][j] != "X":
-        if grid[i][j-1] != "X" and grid[i][j-1] != "O":
-          total += grid[i][j-1]
-        if grid[i-1][j] != "X" and grid[i-1][j] != "O":
-          total += grid[i-1][j]
-      grid[i][j] = total
-  return grid[len(grid)-1][len(grid[0])-1]
+def recur_count_paths(grid):
+  '''
+  - have base cases return 1 (no moves till end of grid)
+  - binary tree
+  '''
+  return _recur_count_paths(grid, 0, 0)
+
+def _recur_count_paths(grid, r, c):
+  # if out of bounds or hits a wall
+  if r == len(grid) or c == len(grid[0]) or grid[r][c] == 'X':
+    return 0
+
+  if r == len(grid) - 1 and c == len(grid[0]) - 1:
+    return 1
+
+  # moving downwards
+  down_count = _recur_count_paths(grid, r + 1, c)
+  # moving right
+  right_count = _recur_count_paths(grid, r, c + 1)
+  return down_count + right_count
