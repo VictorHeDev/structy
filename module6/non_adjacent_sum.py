@@ -7,3 +7,16 @@ def non_adjacent_sum(nums):
   for i in range(2, len(nums)):
     tab[i] = max(nums[i]+tab[i-2], tab[i-1])
   return tab[-1]
+
+# recursion
+def non_adjacent_sum(nums):
+  return _non_adjacent_sum(nums)
+
+def _non_adjacent_sum(nums):
+  if len(nums) == 0:
+    return 0
+
+  include_first = nums[0] + _non_adjacent_sum(nums[2:])
+  exclude_first = _non_adjacent_sum(nums[1:])
+  return max(include_first, exclude_first)
+
