@@ -20,7 +20,8 @@ def _max_path_sum(grid, r, c, memo):
     return memo[pos]
   if r == len(grid) or c == len(grid[0]):
     # return an "invalid" number
-    return float('-inf')
+    # return float('-inf')
+    return 0
 
   if r == len(grid) - 1 and c == len(grid[0]) - 1:
     return grid[r][c]
